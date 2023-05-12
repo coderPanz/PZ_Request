@@ -1,12 +1,12 @@
 import { BASE_URL, TIME_OUT } from "./config"
 import PZrequest from "./request/PZrequest"
 
-// 这里是对每个请求的实例对象进行拦截器的自由配置
+
 export const pzrequest = new PZrequest({
     baseURL: BASE_URL,
     timeout: TIME_OUT
   })
-
+// 当创建实例时传入拦截器, 那么类内部会对该实例单独设置实例拦截器并把该实例返回出来
 export const HYrequest = new PZrequest({
   baseURL: BASE_URL,
   timeout: TIME_OUT,

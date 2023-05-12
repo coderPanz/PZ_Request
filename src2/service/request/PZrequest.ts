@@ -6,10 +6,8 @@ import { PZrequestConfig } from "./type"
     instance: AxiosInstance
     constructor(config: PZrequestConfig) {
       this.instance = axios.create(config)
-      // 拦截器一般作用: 蒙版, 用作loading/token
-      // 添加拦截器, 重复写入拦截器不会覆盖原有的拦截器
-
-      // 全局拦截器
+    
+      // 全局拦截器, 重复写入拦截器不会覆盖原有的拦截器
       this.instance.interceptors.request.use((config) => {
         console.log("请求成功~")
         return config
