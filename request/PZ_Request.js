@@ -10,18 +10,14 @@ import axios from "axios";
         timeout
       })
 
-      // 请求拦截
+      // 在拦截器中配置isLoading请求加载效果
       this.instance.interceptors.request.use(config => {
-        // 发送网络请求前操作isLoading, 使页面出现加载效果
         mainStore.isLoading = true
         return config
       }, err => {
         return err
       })
-
-      // 响应拦截
       this.instance.interceptors.response.use(res => {
-        // 收到数据后操作isLoading 让加载效果消失
         mainStore.isLoading = false
         return res
       }, err => {
@@ -29,8 +25,6 @@ import axios from "axios";
         return err
       })
     }
-
-    // 注意: 为了开发优秀的代码, 要记住对应的模块只负责做对应的事情, 不要把多余的操作加进来. 这里是专门负责网络请求的模块, 所以isLoading的操作不推荐加进来, 我们可以在拦截器中操作isloading。
 
     request(config) {
       // 是一个基于 promise 网络请求库, 所以我们可以进行进一步的封装
@@ -42,16 +36,13 @@ import axios from "axios";
         })
       })
     }
-
     get(config) {
       return this.instance.request({...config, method: "get"})
     }   
-    
     post(config) {
       return this.instance.request({...config, method: "post"})
     }
   }
 
-  // 创建HY_Request实例, 并指定baseURL,timeout等, 并返回该实例
   const pzRequestData = new PZ_Request(BASE_URL, TIME_OUT)
   export default pzRequestData
